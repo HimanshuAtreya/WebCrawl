@@ -5,7 +5,7 @@ import threading
 import time
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from configparser import ConfigParser
+
 
 
 def lambda_handler(event, context):
@@ -73,10 +73,10 @@ def brute_search(q, urls, seen):
 
 
 def tesla(input_url):
-    config = ConfigParser()
-    config.read('config.ini')
-    depth = int(config['depth']['depth'])
-    workers = int(config['worker']['worker'])
+    # config = ConfigParser()
+    # config.read('config.ini')
+    depth = 1
+    workers = 15
     given_url = input_url
     seen = set()
     urls = []
@@ -96,4 +96,4 @@ def tesla(input_url):
     for thread in threads:
         thread.join()
 
-    return 'urls'
+    return urls
