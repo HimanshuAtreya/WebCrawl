@@ -8,23 +8,26 @@ from urllib.parse import urlparse
 
 
 def lambda_handler(event, context):
-	#1. Parse out query string params
-	transactionUrl = event['queryStringParameters']['transactionUrl']
+    # 1. Parse out query string params
+    transactionUrl = event['queryStringParameters']['transactionUrl']
 
-	#2. Construct the body of the response object
-	transactionResponse = {}
-	transactionResponse['retrievedUrls'] = tesla(transactionUrl)
-	transactionResponse['message'] = 'Hello from Lambda land'
+    # 2. Construct the body of the response object
+    parsed = urlparse(transactionUrl)
+    transactionResponse = {}
+    transactionResponse['retrievedUrls'] = 'Invalid Url'
+    if (bool(parsed.netloc) and bool(parsed.scheme)):
+        transactionResponse['retrievedUrls'] = tesla(transactionUrl)
+        transactionResponse['message'] = 'Lambda said Hello!!'
 
-	#3. Construct http response object
-	responseObject = {}
-	responseObject['statusCode'] = 200
-	responseObject['headers'] = {}
-	responseObject['headers']['Content-Type'] = 'application/json'
-	responseObject['body'] = json.dumps(transactionResponse)
+    # 3. Construct http response object
+    responseObject = {}
+    responseObject['statusCode'] = 200
+    responseObject['headers'] = {}
+    responseObject['headers']['Content-Type'] = 'application/json'
+    responseObject['body'] = json.dumps(transactionResponse)
 
-	#4. Return the response object
-	return responseObject
+    # 4. Return the response object
+    return responseObject
 
 
 def brute_search(q, urls, seen):
@@ -60,10 +63,8 @@ def brute_search(q, urls, seen):
 
 
 def tesla(input_url):
-    config = ConfigParser()
-    config.read('config.ini')
-    depth = int(config['depth']['depth'])
-    workers = int(config['worker']['worker'])
+    depth = 1
+    workers = 1
     given_url = input_url
     seen = set()
     urls = []
