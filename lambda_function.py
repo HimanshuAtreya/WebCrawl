@@ -8,32 +8,23 @@ from urllib.parse import urlparse
 
 
 def lambda_handler(event, context):
-    # 1. Parse out query string params
+	#1. Parse out query string params
+	transactionUrl = event['queryStringParameters']['transactionUrl']
 
-    input_url = event['queryStringParameters']['input_url']
-    # transactionType = event['queryStringParameters']['type']
-    # transactionAmount = event['queryStringParameters']['amount']
+	#2. Construct the body of the response object
+	transactionResponse = {}
+	transactionResponse['retrievedUrls'] = tesla(transactionUrl)
+	transactionResponse['message'] = 'Hello from Lambda land'
 
-    # print('transactionId=' + transactionId)
-    # print('transactionType=' + transactionType)
-    # print('transactionAmount=' + transactionAmount)
+	#3. Construct http response object
+	responseObject = {}
+	responseObject['statusCode'] = 200
+	responseObject['headers'] = {}
+	responseObject['headers']['Content-Type'] = 'application/json'
+	responseObject['body'] = json.dumps(transactionResponse)
 
-    # 2. Construct the body of the response object
-    # transactionResponse = {}
-    # transactionResponse['input_url'] = transactionId
-    transactionResponse = {'output_list': tesla(input_url)}
-
-    # transactionResponse['message'] = 'Hello from Lambda land'
-
-    # 3. Construct http response object - Final commit
-    responseObject = {}
-    responseObject['statusCode'] = 200
-    responseObject['headers'] = {}
-    responseObject['headers']['Content-Type'] = 'application/json'
-    responseObject['body'] = json.dumps(transactionResponse)
-
-    # 4. Return the response object
-    return responseObject
+	#4. Return the response object
+	return responseObject
 
 
 def brute_search(q, urls, seen):
