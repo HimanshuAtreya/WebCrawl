@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
 
-
 def lambda_handler(event, context):
     # 1. Parse out query string params
 
@@ -24,8 +23,6 @@ def lambda_handler(event, context):
     # transactionResponse['input_url'] = transactionId
     transactionResponse = {'output_list': tesla(input_url)}
 
-
-
     # transactionResponse['message'] = 'Hello from Lambda land'
 
     # 3. Construct http response object - Final commit
@@ -39,7 +36,6 @@ def lambda_handler(event, context):
     return responseObject
 
 
-
 def brute_search(q, urls, seen):
     while True:
         try:
@@ -51,7 +47,7 @@ def brute_search(q, urls, seen):
             break
 
         try:
-            soup = BeautifulSoup(requests.get(url).text, "lxml")
+            soup = BeautifulSoup(requests.get(url).text, "html.parser")
 
             for x in soup.find_all("a", href=True):
 
