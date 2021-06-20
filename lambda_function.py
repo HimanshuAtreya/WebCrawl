@@ -64,7 +64,7 @@ def brute_search(q, urls, seen):
 
 def tesla(input_url):
     depth = 1
-    workers = 1
+    workers = 15
     given_url = input_url
     seen = set()
     urls = []
