@@ -1,11 +1,17 @@
 import json
-
+import queue
+import requests
+import threading
+import time
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse, urljoin
+from configparser import ConfigParser
 
 def lambda_handler(event, context):
 	#1. Parse out query string params
 	# print('event:', json.dumps(event))
 	# print('queryStringParameters:', json.dumps(event['queryStringParameters']))
-	print('Hi')
+
 	transactionId = event['queryStringParameters']['transactionId']
 	transactionType = event['queryStringParameters']['type']
 	transactionAmount = event['queryStringParameters']['amount']
