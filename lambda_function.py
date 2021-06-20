@@ -5,6 +5,7 @@ def lambda_handler(event, context):
 	#1. Parse out query string params
 	# print('event:', json.dumps(event))
 	# print('queryStringParameters:', json.dumps(event['queryStringParameters']))
+	print('Hi')
 	transactionId = event['queryStringParameters']['transactionId']
 	transactionType = event['queryStringParameters']['type']
 	transactionAmount = event['queryStringParameters']['amount']
@@ -20,7 +21,7 @@ def lambda_handler(event, context):
 	transactionResponse['amount'] = transactionAmount
 	transactionResponse['message'] = 'Hello from Lambda land'
 
-	#3. Construct http response object HT
+	#3. Construct http response object - Final commit
 	responseObject = {}
 	responseObject['statusCode'] = 200
 	responseObject['headers'] = {}
