@@ -60,10 +60,10 @@ def brute_search(q, urls, seen):
 
 
 def tesla(input_url):
-    # config = ConfigParser()
-    # config.read('config.ini')
-    depth = 1
-    workers = 15
+    config = ConfigParser()
+    config.read('config.ini')
+    depth = int(config['depth']['depth'])
+    workers = int(config['worker']['worker'])
     given_url = input_url
     seen = set()
     urls = []
