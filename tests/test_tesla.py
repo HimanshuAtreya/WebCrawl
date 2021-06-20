@@ -1,6 +1,6 @@
 import unittest
 
-from src.lambda_function import tesla
+from WebCrawl.lambda_function import tesla
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
