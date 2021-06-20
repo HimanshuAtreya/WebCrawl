@@ -1,5 +1,6 @@
 import unittest
-from lambda_function import tesla
+
+from src.lambda_function import tesla
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
