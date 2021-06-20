@@ -26,7 +26,7 @@ def lambda_handler(event, context):
     responseObject['headers']['Content-Type'] = 'application/json'
     responseObject['body'] = json.dumps(transactionResponse)
 
-    # 4. Return the response object
+    # 4. Return the response object !!
     return responseObject
 
 
