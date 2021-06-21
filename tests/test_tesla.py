@@ -8,5 +8,9 @@ class MyTestCase(unittest.TestCase):
         self.assertIsNotNone(tesla('https://cxl.com/blog/bayesian-frequentist-ab-testing/'))
 
 
+        # self.assertEqual(95,len(tesla('https://cxl.com/blog/bayesian-frequentist-ab-testing/')))
+
+
+
 if __name__ == '__main__':
     unittest.main()

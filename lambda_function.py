@@ -47,7 +47,7 @@ def brute_search(q, urls, seen):
 
                 link = x["href"]
                 parsed = urlparse(link)
-
+                #validate the URL
                 if bool(parsed.netloc) and bool(parsed.scheme):
 
                     if link and link[0] in "#/":
@@ -58,7 +58,8 @@ def brute_search(q, urls, seen):
                         urls.append(link)
                         q.put((link, level - 1))
 
-        except (requests.exceptions.ConnectionError):
+        except (requests.exceptions.InvalidSchema,
+                requests.exceptions.ConnectionError):
             pass
 
 
@@ -80,7 +81,7 @@ def tesla(input_url):
         threads.append(t)
         t.daemon = True
         t.start()
-
+    #join the Threads
     for thread in threads:
         thread.join()
 
