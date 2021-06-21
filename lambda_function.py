@@ -81,7 +81,7 @@ def tesla(input_url):
         threads.append(t)
         t.daemon = True
         t.start()
-    #join the Threads
+    #join the Threads - Magic !!
     for thread in threads:
         thread.join()
 
